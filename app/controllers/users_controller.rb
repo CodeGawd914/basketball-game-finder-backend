@@ -22,7 +22,10 @@ skip_before_action :authorized, only: [:create, :index,:profile]
   end
 
   def profile
-    render json: {user:(current_user)}
+    userId= JWT.decode(request.authorization,'my_s3cr3t')[0]["user_id"]
+    @user = User.find(userId)
+    render json: {user: @user, jwt: request.authorization}
+
   end
 
   private

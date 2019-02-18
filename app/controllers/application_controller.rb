@@ -14,6 +14,7 @@ class ApplicationController < ActionController::API
   end
 
   def decoded_token
+
     if auth_header
       token = auth_header.split(' ')[1]
       # headers: { 'Authorization': 'Bearer <token>' }
@@ -32,6 +33,7 @@ class ApplicationController < ActionController::API
       user_id = decoded_token[0]['user_id']
       @user = User.find_by(id: user_id)
     end
+    
   end
 
   def authorized
